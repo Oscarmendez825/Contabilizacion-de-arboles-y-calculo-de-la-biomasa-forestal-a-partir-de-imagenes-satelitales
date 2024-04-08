@@ -22,5 +22,3 @@ Each filter is implemented in a separate Python script. To use these filters:
 2. Install the necessary dependencies by running the `installer.bat`.
 3. Execute the desired script(s) on your input images.
 4. Preprocessed images can then be used as input for the tree crown counting model.
-
-```
