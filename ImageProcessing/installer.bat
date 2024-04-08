@@ -9,4 +9,7 @@ pip install numpy
 echo Instalando scikit-image...
 pip install scikit-image
 
+echo Instalando Pillow...
+pip install Pillow
+
 echo Instalación completa.
