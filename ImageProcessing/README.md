@@ -16,9 +16,9 @@ The scripts provided here are aimed at enhancing the quality of input images and
 
 ## Usage
 
-Each filter is implemented in a separate Python script. To use these filters:
+Each filter is implemented in a separate Python function. To use these filters:
 
 1. Clone this repository to your local machine.
 2. Install the necessary dependencies by running the `installer.bat`.
-3. Execute the desired script(s) on your input images.
+3. Execute the desired function(s) on your images.
 4. Preprocessed images can then be used as input for the tree crown counting model.
