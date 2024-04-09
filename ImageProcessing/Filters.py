@@ -127,27 +127,6 @@ def median_filter(image_path, kernel_size=3):
     # Return the filtered image
     return filtered
 
-def median_filter_skimage(image_path, kernel_size=3):
-    """
-    This function applies a median filter to an image using the skimage library.
-
-    Parameters:
-    image_path (str): The path to the image file.
-    kernel_size (int): The size of the kernel to be used in the median filter. Default is 3.
-
-    Returns:
-    filtered (ndarray): The image with the median filter applied.
-    """
-
-    # Read the image from the provided path
-    input_image = imread(image_path)
-
-    # Apply the median filter
-    filtered = median(input_image, selem=np.ones((kernel_size, kernel_size)))
-
-    # Return the filtered image
-    return filtered
-
 def histogram_equalization(image_path):
     """
     This function applies histogram equalization to an image.
@@ -235,8 +214,6 @@ def select_and_execute(image_path, filter_type):
         filtered_image = enhance_contrast(image_path)
     elif filter_type == "median_filter":
         filtered_image = median_filter(image_path)
-    elif filter_type == "median_filter_skimage":
-        filtered_image = median_filter_skimage(image_path)
     elif filter_type == "histogram_equalization":
         filtered_image = histogram_equalization(image_path)
     elif filter_type == "gaussian_filter":
