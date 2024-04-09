@@ -35,7 +35,7 @@ To apply all filters present in Filters.py and preprocess images, you can use th
 
 ### Usage Instructions
 
-1. Make sure you have Python 3.x installed on your system.
+1. Make sure you have Python 3.11 installed on your system.
 2. Install the necessary dependencies by running `installer.bat`.
 3. Place the input image(s) in the directory `Test/Images`.
 4. Execute the following command from the root directory of the project:
