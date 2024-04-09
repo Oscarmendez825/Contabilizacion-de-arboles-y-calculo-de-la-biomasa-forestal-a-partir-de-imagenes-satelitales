@@ -22,3 +22,24 @@ Each filter is implemented in a separate Python function. To use these filters:
 2. Install the necessary dependencies by running the `installer.bat`.
 3. Execute the desired function(s) on your images.
 4. Preprocessed images can then be used as input for the tree crown counting model.
+
+## Usage: Running ImageProcessing.py
+
+To apply all filters present in Filters.py and preprocess images, you can use the `ImageProcessingTest.py` script. This script serves as an example of using all the filters provided in Filters.py.
+
+### Requirements
+
+- Python 3.11
+- OpenCV
+- scikit-image
+
+### Usage Instructions
+
+1. Make sure you have Python 3.x installed on your system.
+2. Install the necessary dependencies by running `installer.bat`.
+3. Place the input image(s) in the directory `Test/Images`.
+4. Execute the following command from the root directory of the project:
+   ```
+   python -m ImageProcessing.Tests.ImageProcessingTest
+   ```
+5. The output images with applied filters will be saved in the directory `Test/Output_Filtered_Images`.
