@@ -1,59 +1,68 @@
-from deepforest import main
+from ImageProcessing import Filters, Preprocessing
+from deepforest import main as mn
 
-def load_model():
+
+def pre_process_image(image_path, tif_path):
     """
-    This function loads the pretrained DeepForest model.
-
-    Returns:
-    model (DeepForest): The pretrained DeepForest model.
-    """
-
-    # Load the pretrained model
-    model = main.deepforest()
-    model.use_release()
-    return model
-
-
-def count_tree(model, image):
-    """
-    This function counts the number of trees in an image using a DeepForest model.
+    Converts an RGBA image to RGB and then to TIFF format.
 
     Parameters:
-    model (DeepForest): The DeepForest model to use for prediction.
-    image (ndarray): The image to predict on.
+    image_path (str): The path to the source RGBA image.
+    tif_path (str): The path where the converted TIFF image will be saved.
+
+    Returns:
+    None
+    """
+    png_path = "./tempImage.png"
+    Preprocessing.convert_rgba_to_rgb(image_path, png_path)
+    Preprocessing.convert_png_to_tiff(png_path, tif_path)
+
+
+def count_tree(predictions):
+    """
+    Counts the number of trees in an image using a DeepForest model.
+
+    Parameters:
+    predictions (DataFrame): The DataFrame containing the predictions from the DeepForest model.
 
     Returns:
     tree_number (int): The number of trees detected in the image.
     """
-
-    # Make predictions on the image
-    predictions = model.predict_image(image)
-
-    # Initialize the tree counter
-    tree_number = 0
-
-    # Iterate over the predictions and count the trees
-    for pred in predictions:
-        if pred["label"] == "tree":
-            tree_number += 1
-
+    tree_number = predictions[predictions['label'] == 'Tree'].shape[0]
     return tree_number
+
 
 def main():
     """
-    This function demonstrates how to use the above functions to count the number of trees in an image.
+    Main function to preprocess the image, load the DeepForest model, and predict the number of trees.
+
+    Returns:
+    None
     """
+    gen_tif_path = "./tempImage.tif"
+    gen_image_path = "../Data/Images/t8.png"
+    pre_process_image(gen_image_path, gen_tif_path)
 
-    # Path to the image
-    image_path = "C:/Users/oscar/OneDrive/Documentos/GitHub/Contabilizacion-de-arboles-y-calculo-de-la-biomasa-forestal-a-partir-de-imagenes-satelitales/Data/Images/t5.png"
+    model = mn.deepforest()
+    model.use_release(check_release=False)
 
-    # Load the model
-    model = load_model()
+    def predict_image(path):
+        """
+        Predicts the number of trees in an image using the DeepForest model and prints the result.
 
-    # Count trees
-    tree_number = count_tree(model, image_path)
+        Parameters:
+        path (str): The path to the image.
 
-    print("Número de árboles detectados:", tree_number)
+        Returns:
+        None
+        """
+        predictions = model.predict_tile(raster_path=path, return_plot=False, patch_size=400)
+        filtered_predictions = predictions[predictions['score'] > 0.15]
+        tree_value = count_tree(filtered_predictions)
+        print(tree_value)
 
-if __name__ == "__main__":
+    predict_image("./tempImage.tif")
+
+
+if __name__ == '__main__':
     main()

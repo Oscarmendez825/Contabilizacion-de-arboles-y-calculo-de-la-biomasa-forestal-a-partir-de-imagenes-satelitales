@@ -224,3 +224,7 @@ def select_and_execute(image_path, filter_type):
         raise ValueError("Invalid filter type")
 
     return filtered_image
+
+
+def prueba():
+    print("prueba")
