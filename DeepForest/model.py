@@ -32,6 +32,22 @@ def count_tree(predictions):
     return tree_number
 
 
+def predict_image(path, model):
+    """
+    Predicts the number of trees in an image using the DeepForest model and prints the result.
+
+    Parameters:
+    path (str): The path to the image.
+
+    Returns:
+    None
+    """
+    predictions = model.predict_tile(raster_path=path, return_plot=False, patch_size=400)
+    filtered_predictions = predictions[predictions['score'] > 0.15]
+    tree_value = count_tree(filtered_predictions)
+    print(tree_value)
+
+
 def main():
     """
     Main function to preprocess the image, load the DeepForest model, and predict the number of trees.
@@ -39,29 +55,12 @@ def main():
     Returns:
     None
     """
+    model = mn.deepforest()
+    model.use_release(check_release=False)
     gen_tif_path = "./tempImage.tif"
     gen_image_path = "../Data/Images/t8.png"
     pre_process_image(gen_image_path, gen_tif_path)
-
-    model = mn.deepforest()
-    model.use_release(check_release=False)
-
-    def predict_image(path):
-        """
-        Predicts the number of trees in an image using the DeepForest model and prints the result.
-
-        Parameters:
-        path (str): The path to the image.
-
-        Returns:
-        None
-        """
-        predictions = model.predict_tile(raster_path=path, return_plot=False, patch_size=400)
-        filtered_predictions = predictions[predictions['score'] > 0.15]
-        tree_value = count_tree(filtered_predictions)
-        print(tree_value)
-
-    predict_image("./tempImage.tif")
+    predict_image("./tempImage.tif", model)
 
 
 if __name__ == '__main__':
