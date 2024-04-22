@@ -1,6 +1,6 @@
 from ImageProcessing import Filters, Preprocessing
 from deepforest import main as mn
-
+import os
 
 def pre_process_image(image_path, tif_path):
     """
@@ -61,6 +61,8 @@ def main():
     gen_image_path = "../Data/Images/t8.png"
     pre_process_image(gen_image_path, gen_tif_path)
     predict_image("./tempImage.tif", model)
+    os.remove(gen_tif_path)
+    os.remove("./tempImage.png")
 
 
 if __name__ == '__main__':
