@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28b9588d-8f59-4812-9945-77b04bfe14fa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Data/Images/t3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Images/t3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Images/t5.png" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Images/t5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/TestData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/TestData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageProcessing/Preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/ImageProcessing/Preprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,17 +36,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Python.model.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Data",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/GitHub/Contabilizacion-de-arboles-y-calculo-de-la-biomasa-forestal-a-partir-de-imagenes-satelitales"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Python.model.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Deep-Forest-(Deep-Learning)&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GitHub/Contabilizacion-de-arboles-y-calculo-de-la-biomasa-forestal-a-partir-de-imagenes-satelitales&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
