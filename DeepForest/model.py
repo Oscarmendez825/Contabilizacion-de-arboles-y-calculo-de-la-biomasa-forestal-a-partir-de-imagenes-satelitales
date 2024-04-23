@@ -1,6 +1,9 @@
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 from ImageProcessing import Filters, Preprocessing
 from deepforest import main as mn
+import pandas as pd
 import os
+
 
 def pre_process_image(image_path, tif_path):
     """
@@ -42,10 +45,55 @@ def predict_image(path, model):
     Returns:
     None
     """
-    predictions = model.predict_tile(raster_path=path, return_plot=False, patch_size=400)
-    filtered_predictions = predictions[predictions['score'] > 0.15]
-    tree_value = count_tree(filtered_predictions)
-    print(tree_value)
+    predictions = model.predict_tile(raster_path=path, return_plot=False, patch_size=550)
+    tree_value = count_tree(predictions)
+    return tree_value
+
+
+def evaluate_predictions(test_data, model):
+    """
+    Evaluates the predictions made by the model on test data.
+
+    Parameters:
+    test_data (DataFrame): DataFrame containing test data with columns 'Title' (image path)
+                           and 'TreeCrowns' (actual number of tree crowns).
+
+    Returns:
+    mae (float): Mean Absolute Error.
+    mse (float): Mean Squared Error.
+    """
+    actual_values = []
+    predicted_values = []
+
+    for index, row in test_data.iterrows():
+        image_path = "../Data/Images/"+row['Title']+".png"
+        actual_value = row['TreeCrowns']
+        gen_tif_path = "./tempImage.tif"
+        pre_process_image(image_path, gen_tif_path)
+        predicted_value = predict_image(gen_tif_path, model)
+        actual_values.append(actual_value)
+        predicted_values.append(predicted_value)
+        os.remove(gen_tif_path)
+        os.remove("./tempImage.png")
+
+    # Calculate MAE and MSE using Scikit-learn functions
+    mae = mean_absolute_error(actual_values, predicted_values)
+    mse = mean_squared_error(actual_values, predicted_values)
+
+    print("Real:     ", actual_values)
+    print("Predicted:", predicted_values)
+
+    return mae, mse
+
+
+def test_deep_forest(model):
+    # Read test data from CSV file
+    test_data = pd.read_csv("../Data/TestData.csv", sep=";")
+    # Call the evaluate_predictions function to get MAE and MSE
+    mae, mse = evaluate_predictions(test_data, model)
+
+    print("Mean Absolute Error:", mae)
+    print("Mean Squared Error:", mse)
 
 
 def main():
@@ -57,12 +105,8 @@ def main():
     """
     model = mn.deepforest()
     model.use_release(check_release=False)
-    gen_tif_path = "./tempImage.tif"
-    gen_image_path = "../Data/Images/t8.png"
-    pre_process_image(gen_image_path, gen_tif_path)
-    predict_image("./tempImage.tif", model)
-    os.remove(gen_tif_path)
-    os.remove("./tempImage.png")
+
+    test_deep_forest(model)
 
 
 if __name__ == '__main__':
