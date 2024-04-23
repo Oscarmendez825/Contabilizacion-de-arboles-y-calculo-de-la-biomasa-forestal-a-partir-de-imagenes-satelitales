@@ -1,5 +1,6 @@
 from PIL import Image
 
+
 def convert_rgba_to_rgb(image_path, output_path):
     """
     This function converts an RGBA image to RGB.
