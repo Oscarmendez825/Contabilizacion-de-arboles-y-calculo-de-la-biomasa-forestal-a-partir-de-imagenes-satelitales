@@ -1,0 +1,35 @@
+Patch Size: 400
+Best Mean Absolute Error: 24.066666666666666
+Best Mean Squared Error: 791.5333333333333
+Best Image Filter: None
+
+Patch Size: 500
+Best Mean Absolute Error: 13.1
+Best Mean Squared Error: 290.9
+Best Image Filter: None
+
+Patch Size: 600
+Best Mean Absolute Error: 13.7
+Best Mean Squared Error: 292.1
+Best Image Filter: None
+
+Patch Size: 700
+Best Mean Absolute Error: 13.5
+Best Mean Squared Error: 299.96666666666664
+Best Image Filter: None
+
+Patch Size: 550
+Best Mean Absolute Error: 13.166666666666666
+Best Mean Squared Error: 278.03333333333336
+Best Image Filter: None
+
+Patch Size: 525
+Best Mean Absolute Error: 12.666666666666666
+Best Mean Squared Error: 281.6
+Best Image Filter: None
+
+Patch Size: 515
+Best Mean Absolute Error: 12.9
+Best Mean Squared Error: 286.96666666666664
+Best Image Filter: None
+

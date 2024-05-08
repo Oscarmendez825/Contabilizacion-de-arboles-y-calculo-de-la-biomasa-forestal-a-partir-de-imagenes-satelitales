@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28b9588d-8f59-4812-9945-77b04bfe14fa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/DeepForest/results.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/TestData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/TestData.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepForest/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepForest/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
