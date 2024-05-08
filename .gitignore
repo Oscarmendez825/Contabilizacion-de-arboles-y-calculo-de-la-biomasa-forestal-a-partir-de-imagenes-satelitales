@@ -158,9 +158,3 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
-
-
-/DeepForest/lightning_logs
-/DeepForest/lightning_logs/version_10
-/Data/Images_Tests
-/DeepForest/lightning_logs
