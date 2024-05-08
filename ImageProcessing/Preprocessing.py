@@ -1,5 +1,6 @@
 from PIL import Image
 
+
 def convert_rgba_to_rgb(image_path, output_path):
     """
     This function converts an RGBA image to RGB.
@@ -21,3 +22,21 @@ def convert_rgba_to_rgb(image_path, output_path):
 
         # Save the new image
         alpha.save(output_path)
+
+
+def convert_png_to_tiff(png_path, tiff_path):
+    """
+    Converts a PNG image to a TIFF image.
+
+    Parameters:
+    png_path (str): The path to the source PNG image.
+    tiff_path (str): The path where the converted TIFF image will be saved.
+
+    Returns:
+    None
+    """
+    # Open the PNG image
+    img = Image.open(png_path)
+
+    # Save the image as a TIFF image
+    img.save(tiff_path, "TIFF")

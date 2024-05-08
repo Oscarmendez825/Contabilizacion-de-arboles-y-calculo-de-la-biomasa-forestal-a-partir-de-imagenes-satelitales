@@ -1,7 +1,7 @@
 import os
 import cv2
 from .. import Filters as filters
-from .. import rgba2rgb 
+from .. import Preprocessing
 
 
 def test_filters(input_image_path, output_directory):
