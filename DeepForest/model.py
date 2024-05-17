@@ -131,6 +131,11 @@ def grid_search(model, patch_size):
         file.write("Best Image Filter: {}\n\n".format(best_image_filter))
 
 
+def load_model():
+    model = mn.deepforest()
+    model.use_release(check_release=False)
+    return model
+
 def main():
     """
     Main function to preprocess the image, load the DeepForest model, and predict the number of trees.
@@ -141,7 +146,6 @@ def main():
     model = mn.deepforest()
     model.use_release(check_release=False)
     grid_search(model, patch_size=515)
-    # test_deep_forest(model, image_filter="histogram_equalization")
 
 
 if __name__ == '__main__':

@@ -44,12 +44,3 @@ def estimate_total_biomass(number_of_trees, dap, delta):
     individual_biomass = estimate_biomass(dap, delta)
     total_biomass = individual_biomass * number_of_trees
     return total_biomass
-
-
-# Example of using the function
-dap_x = 60  # Diameter at breast height in cm
-delta_x = 0.6  # Basic specific weight in g/cm³
-trees = 10
-
-biomass_x = estimate_total_biomass(trees, dap_x, delta_x)
-print(f'The estimated biomass is {biomass_x} kg')
