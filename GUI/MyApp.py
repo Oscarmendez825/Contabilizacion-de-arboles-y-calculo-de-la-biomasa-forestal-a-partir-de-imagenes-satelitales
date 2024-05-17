@@ -8,20 +8,13 @@ from BiomassEstimation import Biomass as bm
 
 class MyApp:
     def __init__(self, root):
-        """
-        This function initializes the application.
-
-        Parameters:
-        root (Tk): The root window of the application.
-        """
-
         self.root = root
         self.root.title("Contabilización de árboles y cálculo de la biomasa a partir de imágenes satelitales")
 
         # Color configuration
-        bg_color = "#d6eadf"  # Background color
-        button_color = "#eac4d5"  # Button color
-        label_color = "#809bce"  # Label color
+        bg_color = "#d6eadf"
+        button_color = "#eac4d5"
+        label_color = "#809bce"
         title = "Contabilización de árboles y cálculo de la biomasa a partir de imágenes satelitales"
 
         # Font configuration
@@ -75,10 +68,6 @@ class MyApp:
         self.loaded_image_path = None
 
     def load_image(self):
-        """
-        This function loads an image and displays it in the application.
-        """
-
         file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg;*.jpeg;*.png")])
         if file_path:
             image = Image.open(file_path)
@@ -86,13 +75,10 @@ class MyApp:
             photo = ImageTk.PhotoImage(image)
             self.image_label.config(image=photo)
             self.image_label.image = photo
-            self.loaded_image_path = file_path  # Store the path of the loaded image
+            self.loaded_image_path = file_path
             self.img_label.config(text=str("Imagen seleccionada: " + self.loaded_image_path))
 
     def use_model(self):
-        """
-        This function uses a model to calculate the number of trees and the biomass from the loaded image.
-        """
         if self.loaded_image_path:
             gen_tif_path = "./tempImage.tif"
             df.pre_process_image(image_path=self.loaded_image_path, tif_path=gen_tif_path, image_filter=None)
@@ -103,7 +89,4 @@ class MyApp:
             self.tree_count_label.config(text=str(predicted_value))
             self.biomass_label.config(text=str(biomass_estimation)+"kg")
         else:
-            # Show a message if no image is loaded
             messagebox.showinfo("Error", "Por favor, carga una imagen antes de obtener resultados.")
-
-

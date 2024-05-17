@@ -161,3 +161,6 @@ cython_debug/
 /Main/lightning_logs
 /Main/lightning_logs
 .idea/workspace.xml
+/Tests/lightning_logs
+/Tests/myenv
+/Tests/myenv
