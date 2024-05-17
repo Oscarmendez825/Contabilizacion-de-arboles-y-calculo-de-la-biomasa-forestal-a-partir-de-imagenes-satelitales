@@ -1,4 +1,5 @@
 import os
+import json
 import tkinter as tk
 from PIL import Image, ImageTk
 from DeepForest import model as df
@@ -87,6 +88,22 @@ class MyApp:
             os.remove(gen_tif_path)
             os.remove("./tempImage.png")
             self.tree_count_label.config(text=str(predicted_value))
-            self.biomass_label.config(text=str(biomass_estimation)+"kg")
+            self.biomass_label.config(text=str(biomass_estimation) + "kg")
+
+            # Guardar los resultados
+            self.save_results(predicted_value, biomass_estimation)
         else:
             messagebox.showinfo("Error", "Por favor, carga una imagen antes de obtener resultados.")
+
+    def save_results(self, tree_count, biomass):
+        result = {"Cantidad de arboles": tree_count, "Biomasa": biomass}
+        try:
+            with open("Resultados.json", "r") as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            data = []
+
+        data.append(result)
+
+        with open("Resultados.json", "w") as file:
+            json.dump(data, file, indent=4)
