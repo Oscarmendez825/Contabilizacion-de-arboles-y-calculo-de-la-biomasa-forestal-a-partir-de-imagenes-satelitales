@@ -1,6 +1,9 @@
+import os
 import tkinter as tk
-from tkinter import filedialog
 from PIL import Image, ImageTk
+from DeepForest import model as df
+from tkinter import filedialog, messagebox
+from BiomassEstimation import Biomass as bm
 
 
 class MyApp:
@@ -36,6 +39,10 @@ class MyApp:
         title_label = tk.Label(root, text=title, font=("Helvetica", 20, "bold"), bg=bg_color, fg=label_color)
         title_label.pack(pady=20)
 
+        # Selected image path label
+        self.img_label = tk.Label(root, text="Imagen seleccionada: ####", font=("Helvetica", 15, "bold"), bg=bg_color, fg=label_color)
+        self.img_label.pack(pady=20)
+
         # Button to load image
         load_button = tk.Button(root, text="Subir imagen", font=font, bg=button_color, command=self.load_image,
                                 relief="flat", activebackground="#B0C4DE")
@@ -56,12 +63,16 @@ class MyApp:
 
         label1 = tk.Label(labels_frame, text="Cantidad de árboles:", font=font, bg=bg_color, fg=label_color)
         label1.pack(anchor='w', padx=10, pady=5)
-        label2 = tk.Label(labels_frame, text="####", font=font, bg=bg_color, fg=label_color)
-        label2.pack(anchor='w', padx=10, pady=5)
+        self.tree_count_label = tk.Label(labels_frame, text="####", font=font, bg=bg_color, fg=label_color)
+        self.tree_count_label.pack(anchor='w', padx=10, pady=5)
         label3 = tk.Label(labels_frame, text="Biomasa calculada:", font=font, bg=bg_color, fg=label_color)
         label3.pack(anchor='w', padx=10, pady=5)
-        label4 = tk.Label(labels_frame, text="####", font=font, bg=bg_color, fg=label_color)
-        label4.pack(anchor='w', padx=10, pady=5)
+        self.biomass_label = tk.Label(labels_frame, text="####", font=font, bg=bg_color, fg=label_color)
+        self.biomass_label.pack(anchor='w', padx=10, pady=5)
+        self.model = df.load_model()
+
+        # Attribute to store the path of the loaded image
+        self.loaded_image_path = None
 
     def load_image(self):
         """
@@ -75,15 +86,24 @@ class MyApp:
             photo = ImageTk.PhotoImage(image)
             self.image_label.config(image=photo)
             self.image_label.image = photo
+            self.loaded_image_path = file_path  # Store the path of the loaded image
+            self.img_label.config(text=str("Imagen seleccionada: " + self.loaded_image_path))
 
     def use_model(self):
         """
         This function uses a model to calculate the number of trees and the biomass from the loaded image.
         """
-        print("use model")
+        if self.loaded_image_path:
+            gen_tif_path = "./tempImage.tif"
+            df.pre_process_image(image_path=self.loaded_image_path, tif_path=gen_tif_path, image_filter=None)
+            predicted_value = df.predict_image(path=gen_tif_path, model=self.model, patch_size=525)
+            biomass_estimation = bm.estimate_total_biomass(number_of_trees=predicted_value, dap=1.15, delta=0.8)
+            os.remove(gen_tif_path)
+            os.remove("./tempImage.png")
+            self.tree_count_label.config(text=str(predicted_value))
+            self.biomass_label.config(text=str(biomass_estimation)+"kg")
+        else:
+            # Show a message if no image is loaded
+            messagebox.showinfo("Error", "Por favor, carga una imagen antes de obtener resultados.")
 
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = MyApp(root)
-    root.mainloop()
