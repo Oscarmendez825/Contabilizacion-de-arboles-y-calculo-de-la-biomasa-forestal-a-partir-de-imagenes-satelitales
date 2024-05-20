@@ -29,7 +29,7 @@ To apply all filters present in Filters.py and preprocess images, you can use th
 
 ### Requirements
 
-- Python 3.11
+- Python 3.11 or higher
 - OpenCV
 - scikit-image
 
