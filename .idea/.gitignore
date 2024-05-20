@@ -1,0 +1,8 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+
+./DeepForest/lightning_logs
+./DeepForest/lightning_logs
+./DeepForest/lightning_logs/version_10
