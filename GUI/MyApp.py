@@ -8,7 +8,16 @@ from BiomassEstimation import Biomass as bm
 
 
 class MyApp:
+    """
+    This class represents a GUI application for counting trees and calculating biomass from satellite images.
+    """
     def __init__(self, root):
+        """
+        Initialize the application.
+
+        Parameters:
+        root (tk.Tk): The root window of the application.
+        """
         self.root = root
         self.root.title("Contabilización de árboles y cálculo de la biomasa a partir de imágenes satelitales")
 
@@ -34,7 +43,7 @@ class MyApp:
         title_label.pack(pady=20)
 
         # Selected image path label
-        self.img_label = tk.Label(root, text="Imagen seleccionada: ####", font=("Helvetica", 15, "bold"), bg=bg_color, fg=label_color)
+        self.img_label = tk.Label(root, text="Imagen seleccionada: ####", font=("Helvetica", 9, "bold"), bg=bg_color, fg=label_color)
         self.img_label.pack(pady=20)
 
         # Button to load image
@@ -69,6 +78,9 @@ class MyApp:
         self.loaded_image_path = None
 
     def load_image(self):
+        """
+        Load an image from the file system and display it in the application.
+        """
         file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg;*.jpeg;*.png")])
         if file_path:
             image = Image.open(file_path)
@@ -80,11 +92,14 @@ class MyApp:
             self.img_label.config(text=str("Imagen seleccionada: " + self.loaded_image_path))
 
     def use_model(self):
+        """
+        Use the DeepForest model to predict the number of trees in the loaded image and calculate the total biomass.
+        """
         if self.loaded_image_path:
             gen_tif_path = "./tempImage.tif"
             df.pre_process_image(image_path=self.loaded_image_path, tif_path=gen_tif_path, image_filter=None)
             predicted_value = df.predict_image(path=gen_tif_path, model=self.model, patch_size=525)
-            biomass_estimation = bm.estimate_total_biomass(number_of_trees=predicted_value, dap=1.15, delta=0.8)
+            biomass_estimation = bm.estimate_total_biomass(number_of_trees=predicted_value, dap=1.15, delta=0.6)
             os.remove(gen_tif_path)
             os.remove("./tempImage.png")
             self.tree_count_label.config(text=str(predicted_value))
@@ -96,6 +111,13 @@ class MyApp:
             messagebox.showinfo("Error", "Por favor, carga una imagen antes de obtener resultados.")
 
     def save_results(self, tree_count, biomass):
+        """
+        Save the results of the tree count and biomass calculation to a JSON file.
+
+        Parameters:
+        tree_count (int): The number of trees.
+        biomass (float): The calculated biomass.
+        """
         result = {"Cantidad de arboles": tree_count, "Biomasa": biomass}
         try:
             with open("Resultados.json", "r") as file:
